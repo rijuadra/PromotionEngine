@@ -91,4 +91,33 @@ public class PromotionEngineTesting {
         long l = checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
         Assert.assertEquals(50,l);
     }
+
+    @Test
+    public void checkoutWithAllPrmotionScinario1() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("A", 5);
+        checkoutHandler.addProductsToCart("B", 5);
+        checkoutHandler.addProductsToCart("C", 1);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long price =0;
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new ThreeADiscountOffer(),checkoutProductList);
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new TwoBDiscountOffer(),checkoutProductList);
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
+        Assert.assertEquals(370,price);
+    }
+
+    @Test
+    public void checkoutAllPrmotionScinario2() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("A", 3);
+        checkoutHandler.addProductsToCart("B", 5);
+        checkoutHandler.addProductsToCart("C", 1);
+        checkoutHandler.addProductsToCart("D", 1);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long price =0;
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new ThreeADiscountOffer(),checkoutProductList);
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new TwoBDiscountOffer(),checkoutProductList);
+        price=price+ checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
+        Assert.assertEquals(280,price);
+    }
 }
