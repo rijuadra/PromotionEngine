@@ -1,6 +1,7 @@
 package com.ecommerce.service;
 
 import com.ecommerce.bo.Cart;
+import com.ecommerce.promotion.IPromotion;
 
 import java.util.HashMap;
 import static com.ecommerce.bo.ProductCatalog.*;
@@ -30,7 +31,7 @@ public class CheckoutHandler {
     }
 
 
-    public long calculatePriceWithPromotion() {
-        return 0;
+    public long calculatePriceWithPromotion(IPromotion promotion, HashMap<String,Integer> checkoutProductList){
+        return promotion.calculatePriceWithPromotion(checkoutProductList);
     }
 }

@@ -1,5 +1,6 @@
 package com.ecommerce;
 
+import com.ecommerce.promotion.impl.ThreeADiscountOffer;
 import com.ecommerce.service.CheckoutHandler;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class PromotionEngineTesting {
         CheckoutHandler checkoutHandler = new CheckoutHandler();
         checkoutHandler.addProductsToCart("A", 6);
         HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
-        long l = checkoutHandler.calculatePriceWithPromotion();
+        long l = checkoutHandler.calculatePriceWithPromotion(new ThreeADiscountOffer(),checkoutProductList);
         Assert.assertEquals(260,l);
     }
     @Test
@@ -40,7 +41,7 @@ public class PromotionEngineTesting {
         CheckoutHandler checkoutHandler = new CheckoutHandler();
         checkoutHandler.addProductsToCart("A", 5);
         HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
-        long l = checkoutHandler.calculatePriceWithPromotion();
+        long l = checkoutHandler.calculatePriceWithPromotion(new ThreeADiscountOffer(),checkoutProductList);
         Assert.assertEquals(230,l);
     }
 }
