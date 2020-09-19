@@ -1,6 +1,7 @@
 package com.ecommerce;
 
 import com.ecommerce.promotion.impl.ThreeADiscountOffer;
+import com.ecommerce.promotion.impl.TwoBDiscountOffer;
 import com.ecommerce.service.CheckoutHandler;
 import org.junit.Assert;
 import org.junit.Before;
@@ -43,5 +44,22 @@ public class PromotionEngineTesting {
         HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
         long l = checkoutHandler.calculatePriceWithPromotion(new ThreeADiscountOffer(),checkoutProductList);
         Assert.assertEquals(230,l);
+    }
+
+    @Test
+    public void checkoutWithTwoBPrmotionScinario1() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("B", 4);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion(new TwoBDiscountOffer(),checkoutProductList);
+        Assert.assertEquals(90,l);
+    }
+    @Test
+    public void checkoutWithTwoBPrmotionScinario2() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("B", 5);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion(new TwoBDiscountOffer(),checkoutProductList);
+        Assert.assertEquals(120,l);
     }
 }
