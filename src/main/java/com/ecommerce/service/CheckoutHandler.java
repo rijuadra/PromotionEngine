@@ -15,7 +15,9 @@ public class CheckoutHandler {
         cart.getCheckoutProductList().put(sku_id, quantity);
         return true;
     }
-
+    public Cart getCartDetails() {
+        return this.cart;
+    }
     public int calculateFinalPrice() {
         int sum=0;
         HashMap<String, Integer> checkoutProductList = cart.getCheckoutProductList();
@@ -25,5 +27,10 @@ public class CheckoutHandler {
             sum=sum+price*quantity;
         }
         return sum;
+    }
+
+
+    public long calculatePriceWithPromotion() {
+        return 0;
     }
 }

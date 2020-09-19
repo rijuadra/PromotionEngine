@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static com.ecommerce.bo.ProductCatalog.*;
 
 public class PromotionEngineTesting {
@@ -24,5 +26,21 @@ public class PromotionEngineTesting {
         checkoutHandler.addProductsToCart("C", 1);
         checkoutHandler.addProductsToCart("D", 1);
         Assert.assertEquals(115, checkoutHandler.calculateFinalPrice());
+    }
+    @Test
+    public void checkoutWithThreeAPrmotionScinario1() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("A", 6);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion();
+        Assert.assertEquals(260,l);
+    }
+    @Test
+    public void checkoutWithThreeAPrmotionScinario2() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("A", 5);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion();
+        Assert.assertEquals(230,l);
     }
 }
