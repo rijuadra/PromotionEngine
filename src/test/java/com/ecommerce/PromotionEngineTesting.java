@@ -1,5 +1,6 @@
 package com.ecommerce;
 
+import com.ecommerce.promotion.impl.CandDComboOffer;
 import com.ecommerce.promotion.impl.ThreeADiscountOffer;
 import com.ecommerce.promotion.impl.TwoBDiscountOffer;
 import com.ecommerce.service.CheckoutHandler;
@@ -61,5 +62,33 @@ public class PromotionEngineTesting {
         HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
         long l = checkoutHandler.calculatePriceWithPromotion(new TwoBDiscountOffer(),checkoutProductList);
         Assert.assertEquals(120,l);
+    }
+
+    @Test
+    public void checkoutWithCDPrmotionScianrio1() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("C", 1);
+        checkoutHandler.addProductsToCart("D", 1);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
+        Assert.assertEquals(30,l);
+    }
+    @Test
+    public void checkoutWithCDPrmotionScianrio2() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("C", 1);
+        checkoutHandler.addProductsToCart("D", 2);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
+        Assert.assertEquals(45,l);
+    }
+    @Test
+    public void checkoutWithCDPrmotionScianrio3() {
+        CheckoutHandler checkoutHandler = new CheckoutHandler();
+        checkoutHandler.addProductsToCart("C", 2);
+        checkoutHandler.addProductsToCart("D", 1);
+        HashMap<String, Integer> checkoutProductList = checkoutHandler.getCartDetails().getCheckoutProductList();
+        long l = checkoutHandler.calculatePriceWithPromotion(new CandDComboOffer(),checkoutProductList);
+        Assert.assertEquals(50,l);
     }
 }
